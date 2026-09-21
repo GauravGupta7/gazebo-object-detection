@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="standalone_camera">
+
+  <!-- World Frame Link -->
+  <link name="world"/>
+
+  <!-- Fixed Joint positioning the Camera directly facing the Gazebo shapes -->
+  <joint name="world_joint" type="fixed">
+    <parent link="world"/>
+    <child link="camera_link"/>
+    <!-- Positioned 2.5m back on Y-axis, 1.2m up on Z-axis, angled downward toward world origin -->
+    <origin xyz="0.0 -2.5 1.2" rpy="0.0 0.35 1.5708"/>
+  </joint>
+
+  <!-- Physical Camera Box Link -->
+  <link name="camera_link">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <!-- Gazebo ROS Camera Plugin Setup -->
+  <gazebo reference="camera_link">
+    <sensor type="camera" name="main_camera">
+      <update_rate>30.0</update_rate>
+      <camera name="head">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+      </camera>
+      
+      <!-- Plugin node that publishes raw images and metadata to ROS topics -->
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>camera</cameraName>
+        <imageTopicName>rgb/image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+</robot>

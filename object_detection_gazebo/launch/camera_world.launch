@@ -1,0 +1,21 @@
+<launch>
+  <!-- 1. Launch Gazebo simulation with the pre-existing shapes world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="worlds/shapes.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+  </include>
+
+  <!-- 2. Load the URDF/Xacro camera model onto the ROS Parameter Server -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find object_detection_gazebo)/urdf/camera.urdf.xacro'" />
+
+  <!-- 3. Spawn the camera model inside the Gazebo world -->
+  <node name="spawn_camera" pkg="gazebo_ros" type="spawn_model"
+        args="-urdf -param robot_description -model standalone_camera" output="screen"/>
+
+  <!-- 4. Spawn the Red Ball directly using its SDF file -->
+  <node name="spawn_red_ball" pkg="gazebo_ros" type="spawn_model"
+        args="-file $(find object_detection_gazebo)/models/red_ball.sdf -sdf -model red_ball"
+        output="screen"/>
+</launch>
