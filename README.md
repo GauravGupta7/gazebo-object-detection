@@ -23,8 +23,8 @@ A 3D point in space is transformed to 2D image using the camera intrinsic matrix
 $$
 
 \begin{bmatrix}
-    u \
-    v \
+    u \\
+    v \\
     1
 \end{bmatrix}
 
@@ -33,13 +33,13 @@ $$
 \frac{1}{Z}
 \begin{bmatrix}
 
-f_x && 0 && c_x\\
-0 && f_y && c_y\\
+f_x && 0 && c_x \\
+0 && f_y && c_y \\
 0 && 0 && 1
 \end{bmatrix}
 
 \begin{bmatrix}
-X_c\ Y_c\ Z_c
+X_c \\ Y_c \\ Z_c
 \end{bmatrix}
 
 $$
