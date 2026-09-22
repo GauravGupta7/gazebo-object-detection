@@ -39,6 +39,8 @@ Y_c \\
 Z_c
 \end{bmatrix}
 $$
+
+
 To invert this projection from 2D to 3D, given the object depth $Z_c$, we back project to find the 3D spatial position $(X_c, Y_c)$
 
 $$
