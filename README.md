@@ -37,3 +37,6 @@ $$Y_c = \frac{(v - c_y) \cdot Z_c}{f_y}$$
 Gazebo publishes the intrinsic parameters $(f_x, f_y, c_x, c_y)$ details on the topic `/camera/camera_info`. 
 
 Since our camera current topic `/camera/rgb/image_raw` is an RGB stream, we can estimate depth from known geometry or switch to an RGB-D camera. 
+
+## The TF library (TF2 here)
+tf is a package that lets the user keep track of multiple coordinate frames over time. tf maintains the relationship between coordinate frames in a tree structure buffered in time, and lets the user transform points, vectors, etc between any two coordinate frames at any desired point in time. 
