@@ -22,16 +22,6 @@ A 3D point in space is transformed to 2D image using the camera intrinsic matrix
 
 To invert this projection from 2D to 3D, given the object depth $Z_c$, we back project to find the 3D spatial position $(X_c, Y_c)$
 
-$$
-X_c = \frac{(u-c_x) Z_c}{f_x}
-\\
-Y_c = \frac{(u-c_y) Z_c}{f_y}
-$$
-
-Thus, obtaining the spatial coordinates $(X_c, Y_c, Z_c)$
-
-## 3D Spatial Perception & Pinhole Camera Model
-
 To project 2D image coordinates $(u, v)$ back into 3D camera coordinates $(X_c, Y_c, Z_c)$, we utilize the standard **Pinhole Camera Model** intrinsic matrix $K$:
 
 $$
