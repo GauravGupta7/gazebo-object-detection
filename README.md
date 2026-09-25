@@ -36,8 +36,8 @@ To project 2D image coordinates $(u, v)$ back into 3D camera coordinates $(X_c, 
 
 $$
 \begin{bmatrix} 
-    u    \\  \\
-    v    \\  \\ 
+    u    \\\\
+    v    \\\\ 
     1 
 \end{bmatrix} = \frac{1}{Z_c} \begin{bmatrix} f_x & 0 & c_x \\ 0 & f_y & c_y \\ 0 & 0 & 1 \end{bmatrix} \begin{bmatrix} X_c \\ Y_c \\ Z_c \end{bmatrix}
 $$
