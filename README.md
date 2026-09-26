@@ -80,3 +80,21 @@ Since our camera current topic `/camera/rgb/image_raw` is an RGB stream, we can 
 
 ## The TF library (TF2 here)
 tf is a package that lets the user keep track of multiple coordinate frames over time. tf maintains the relationship between coordinate frames in a tree structure buffered in time, and lets the user transform points, vectors, etc between any two coordinate frames at any desired point in time. 
+
+## Project Snapshots
+
+**1. The Gazebo View**
+
+![Gazebo Screenshot ](object_detection_gazebo/images/Gazebo_SS.png "Gazebo Screenshot")
+
+<br>
+
+**2. The RQT View**
+
+![RQT Screenshot ](object_detection_gazebo/images/RQT_SS.png "RQT View")
+
+<br>
+
+**3. RVIZ View**
+
+![RQT Screenshot ](object_detection_gazebo/images/RVIZ_SS.png "RVIZ Screenshot")
