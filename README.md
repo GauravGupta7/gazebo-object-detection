@@ -1,5 +1,38 @@
 # gazebo-object-detection
 
+## Tools Needed
+1. Ubuntu 18.04
+1. ROS Melodic (Robot Operating System)
+2. Python
+3. Gazebo
+4. RVIZ
+
+## Package Structure
+```text
+gazebo-object-detection/
+├── launch/
+│   └── camera_world.launch
+├── models/
+│   └── red_ball.sdf
+├── src/
+│   └── scripts/
+│       ├── object_detector.py
+│       ├── color_object_detector.py
+│       ├── object_3d_position_estimator.py
+│       └── object_tf_broadcaster.py
+└── urdf/
+    └── camera.urdf.xacro
+```
+
+## Implemented Features:
+1. **Camera World Setup:** Custom camera model (`camera.urdf.xacro`) spawned inside Gazebo alongside standard geometric shapes and a target red sphere (`red_ball.sdf`).
+
+2. **OpenCV Color Segmentation:** Segments red target objects using dual-range HSV thresholding and morphological filtering (`cv2.morphologyEx`)
+
+3. **3D Spatial Projection:** Back-projects 2D centroid pixels $(u, v)$ to 3D camera coordinates $(X_c, Y_c, Z_c)$ using intrinsic parameters from `/camera/camera_info`.
+
+4. **TF Frame Broadcasting:** Dynamically broadcasts `detected_red_ball` relative to `camera_link` for downstream robotics tasks.
+
 ## Execution Commands:
 ```bash
 
@@ -7,11 +40,18 @@
 roslaunch object_detection_gazebo camera_world.launch
 
 # For running scripts
-rosrun object_detection_gazebo color_object_detector.py
+rosrun object_detection_gazebo <script_name_to_be_executed.py >
 
 # Camera live feed
 rosrun rqt_image_view rqt_image_view
+
+# To visualize the frames in 3D space
+rosrun rviz rviz
 ```
+
+In RVIZ:
+* Set Fixed Frame to world or camera_link
+* Click Add $\rightarrow$ Select TF to see the `detected_red_ball` frame floating at its exact position!
 
 ## 3D Projection and Camera Intrinsics
 
